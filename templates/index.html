@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monochrome Music Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music_player.css') }}">
+</head>
+<body class="bg-dark">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Search and Queue Section -->
+            <div class="col-md-4 search-section p-4">
+                <div class="search-container mb-4">
+                    <h3 class="text-light mb-3">Search Music</h3>
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search for songs...">
+                        <button class="btn btn-outline-light" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-results mb-4" id="searchResults">
+                    <!-- Search results will be populated here -->
+                </div>
+
+                <div class="queue-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="text-light mb-0">Queue</h3>
+                        <button class="btn btn-outline-light btn-sm" id="clearQueueBtn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    <div id="queueList" class="queue-list">
+                        <!-- Queue items will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Section -->
+            <div class="col-md-8 player-section p-4">
+                <div class="player-container">
+                    <div class="now-playing-info text-center mb-4">
+                        <div class="album-art-container mb-4">
+                            <img id="albumArt" src="{{ url_for('static', filename='images/default-album.png') }}" alt="Album Art" class="album-art">
+                        </div>
+                        <h2 id="songTitle" class="text-light mb-2">No Track Selected</h2>
+                        <p id="artistName" class="text-muted mb-4">Select a track to play</p>
+                    </div>
+
+                    <div class="timeline-container mb-4">
+                        <input type="range" class="timeline-slider" id="timelineSlider" value="0" min="0" max="100">
+                        <div class="d-flex justify-content-between mt-2">
+                            <span id="currentTime" class="time-display">0:00</span>
+                            <span id="totalTime" class="time-display">0:00</span>
+                        </div>
+                    </div>
+
+                    <div class="controls d-flex justify-content-center align-items-center gap-4 mb-4">
+                        <button class="btn" id="shuffleBtn" title="Shuffle">
+                            <i class="fas fa-random"></i>
+                        </button>
+                        <button class="btn" id="prevBtn" title="Previous">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="btn play-btn" id="playPauseBtn" title="Play/Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn" id="nextBtn" title="Next">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <button class="btn" id="repeatBtn" title="Repeat">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+
+                    <div class="volume-container d-flex align-items-center gap-3">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtubePlayer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="{{ url_for('static', filename='js/music_player.js') }}"></script>
+</body>
+</html>
